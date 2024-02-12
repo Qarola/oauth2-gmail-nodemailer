@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Verification</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  .message {
+    text-align: center;
+    padding: 20px;
+    background-color: #065f46; /* Green for success */
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .error {
+    background-color: #991B18; /* Red for error */
+  }
+  .icon {
+    width: 85px;
+    height: 85px;
+    fill: currentColor;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="message" id="messageContainer">
+    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M8 0a8 8 0 0 1 8 8c0 4.418-3.582 8-8 8s-8-3.582-8-8a8 8 0 0 1 8-8zm1.97 3.03a.75.75 0 0 1 1.06 1.06l-7 7a.75.75 0 0 1-1.06 0l-3.5-3.5a.75.75 0 0 1 1.06-1.06L7 9.417l6.97-6.97z"/>
+    </svg>
+    <h2>Email has been verified</h2>
+    <p>You can now log in.</p>
+    <p>Qarola/Nodemailer-Gmail-Oauth2 App</p>
+  </div>
+</div>
+
+<script>
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const error = urlParams.get('error');
+  const message = urlParams.get('message');
+
+  if (error) {
+    const messageContainer = document.getElementById('messageContainer');
+    messageContainer.classList.add('error');
+    messageContainer.querySelector('h2').innerText = message ? message : 'An error occurred.';
+    messageContainer.querySelector('p:nth-of-type(2)').innerText = 'Please try again.';
+  }
+</script>
+</body>
+</html>
